@@ -1,5 +1,6 @@
 package edu.eci.arsw.blueprints.controllers;
 
+import edu.eci.arsw.blueprints.model.ApiResponse;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
@@ -15,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/blueprints")
+@RequestMapping("api/v1/blueprints")
 public class BlueprintsAPIController {
 
     private final BlueprintsServices services;
@@ -23,9 +24,16 @@ public class BlueprintsAPIController {
     public BlueprintsAPIController(BlueprintsServices services) { this.services = services; }
 
     // GET /blueprints
+    //@GetMapping
+    //public ResponseEntity<Set<Blueprint>> getAll() {
+        
+      //  return ResponseEntity.ok(services.getAllBlueprints());
+    //}
+
     @GetMapping
-    public ResponseEntity<Set<Blueprint>> getAll() {
-        return ResponseEntity.ok(services.getAllBlueprints());
+    public ApiResponse<Set<Blueprint>> getAllResponse(){
+        ApiResponse<Set<Blueprint>> response = new ApiResponse<>(200, "execute ok", services.getAllBlueprints());
+        return response;
     }
 
     // GET /blueprints/{author}
